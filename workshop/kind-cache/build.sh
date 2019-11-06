@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-
+IMAGE_NAME=quay.io/kind-workshop/kind-cache
+IMAGE_TAG=latest
 set -xe
 echo "prepulling images"
 cat images | xargs -I {} docker pull {}
 
-mkdir -p tars/ tars/quay.io/mauilion tars/k8s.gcr.io tars/kindest
+mkdir -p tars/ tars/quay.io/kind-workshop tars/k8s.gcr.io tars/kindest
 echo "exporting images"
 
 cat images | xargs -I {} docker image save {} -o tars/{}
@@ -18,6 +19,6 @@ echo "COPY runit.sh /root/runit.sh" >> Dockerfile
 echo 'CMD ["/root/runit.sh"]' >> Dockerfile
 
 echo "building layered image"
-docker build -f Dockerfile -t quay.io/mauilion/kind-cache:unflat .
-container_id=$(docker run -d quay.io/mauilion/kind-cache:unflat /bin/true)
-docker export $container_id | docker import - quay.io/mauilion/kind-cache:latest
+docker build -f Dockerfile -t ${IMAGE_NAME}:unflat .
+container_id=$(docker run -d ${IMAGE_NAME}:unflat /bin/true)
+docker export $container_id | docker import - ${IMAGE_NAME}:${IMAGE_TAG}
