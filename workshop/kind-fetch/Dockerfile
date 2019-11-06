@@ -12,4 +12,4 @@ COPY --from=docker /usr/bin/quayctl /usr/bin/quayctl
 COPY --from=docker /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /usr/lib/x86_64-linux-gnu/libstdc++.so.6
 COPY --from=docker /lib/x86_64-linux-gnu/libgcc_s.so.1 /lib/x86_64-linux-gnu/libgcc_s.so.1
 
-CMD ["/usr/bin/quayctl", "docker", "torrent", "pull", "quay.io/mauilion/kind-cache", "quay.io/mauilion/go-cache"]
+CMD ["/usr/bin/quayctl", "docker", "torrent", "pull", "quay.io/mauilion/kind-cache"]

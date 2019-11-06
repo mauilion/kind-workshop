@@ -1,7 +1,8 @@
 FROM bash
 WORKDIR /images
 RUN apk add --update docker-cli && rm -rf /var/cache/apk/
-COPY tars/mauilion/kind-buildenv:latest mauilion/kind-buildenv:latest
+COPY tars/quay.io/mauilion/go-cache:v1.16.0 quay.io/mauilion/go-cache:v1.16.0
+COPY tars/quay.io/mauilion/kind-buildenv:1.13 quay.io/mauilion/kind-buildenv:1.13
 COPY tars/k8s.gcr.io/etcd:3.3.15-0 k8s.gcr.io/etcd:3.3.15-0
 COPY tars/k8s.gcr.io/kube-cross:v1.12.9-1 k8s.gcr.io/kube-cross:v1.12.9-1
 COPY tars/k8s.gcr.io/coredns:1.6.2 k8s.gcr.io/coredns:1.6.2

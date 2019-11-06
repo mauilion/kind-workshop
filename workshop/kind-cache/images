@@ -1,4 +1,5 @@
-mauilion/kind-buildenv:latest
+quay.io/mauilion/go-cache:v1.16.0
+quay.io/mauilion/kind-buildenv:1.13
 k8s.gcr.io/etcd:3.3.15-0
 k8s.gcr.io/kube-cross:v1.12.9-1
 k8s.gcr.io/coredns:1.6.2
