@@ -1,0 +1,1 @@
+docker run --rm --name kind-cache -v /var/run/docker.sock:/var/run/docker.sock quay.io/kind-workshop/kind-cache
