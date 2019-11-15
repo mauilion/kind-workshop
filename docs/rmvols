@@ -1,0 +1,1 @@
+docker rmi $(docker image ls -qa -f reference=kube-build)
