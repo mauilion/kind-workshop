@@ -20,5 +20,8 @@ echo 'CMD ["/root/runit.sh"]' >> Dockerfile
 
 echo "building layered image"
 docker build -f Dockerfile -t ${IMAGE_NAME}:unflat .
-container_id=$(docker run -d ${IMAGE_NAME}:unflat /bin/true)
-docker export $container_id | docker import - ${IMAGE_NAME}:${IMAGE_TAG}
+flat_id=$(docker run -d ${IMAGE_NAME}:unflat /bin/true)
+docker export ${flat_id} | docker import - ${IMAGE_NAME}:flat
+echo "FROM ${IMAGE_NAME}:flat" > Dockerfile.flat
+echo 'CMD ["/root/runit.sh"]' >> Dockerfile.flat
+docker build -f Dockerfile.flat -t ${IMAGE_NAME}:${IMAGE_TAG} .
