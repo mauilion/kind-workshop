@@ -25,3 +25,5 @@ docker export ${flat_id} | docker import - ${IMAGE_NAME}:flat
 echo "FROM ${IMAGE_NAME}:flat" > Dockerfile.flat
 echo 'CMD ["/root/runit.sh"]' >> Dockerfile.flat
 docker build -f Dockerfile.flat -t ${IMAGE_NAME}:${IMAGE_TAG} .
+
+rm Dockerfile*
