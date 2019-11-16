@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
-if grep -qs /image /proc/mounts ; then
-  aria2c -s9 -x2 https://t{1..9}.k8s.work/kind-cache.tar.gz -o /image/kind-cache.tar.gz | grep -v WARN
-  chmod +r /image/kind-cache.tar.gz
+FILENAME=kind-cache.tar.gz
+if grep -qs /tmp /proc/mounts ; then
+  echo "beginning download"
+  rm /tmp/${FILENAME}
+  aria2c -s9 -x2 https://t{1..9}.k8s.work/${FILENAME} --console-log-level=error -o /tmp/${FILENAME}
+  chmod +r /tmp/${FILENAME}
   echo "to load this run:"
-  echo "docker load -i /tmp/kind-cache.tar.gz"
+  echo "docker load -i /tmp/${FILENAME}"
 else
-  echo "couldn't see /image mounted please run the command as:"
-  echo "docker run --rm -v /tmp:/image quay.io/kind-fetch"
+  echo "couldn't see /tmp dir mounted please run the command as:"
+  echo "docker run --rm -v /tmp:/tmp quay.io/kind-fetch"
+  echo "or curl -L kind.k8s.work/fetch | bash"
   exit 1
 fi

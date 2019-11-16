@@ -1,1 +1,1 @@
-docker run --rm -v /tmp:/image --network=host quay.io/kind-workshop/kind-fetch
+docker run --rm -v /tmp:/tmp --network=host quay.io/kind-workshop/kind-fetch
